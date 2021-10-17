@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber.html","rerun:target/rerun.txt" ,
                 "me.jvt.cucumber.report.PrettyReports:target"} ,
         dryRun = false,
-        tags = "@ui"
+        tags = "@smok"
 )
 
 public class TestRunner {

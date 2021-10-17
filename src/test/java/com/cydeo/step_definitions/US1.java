@@ -1,6 +1,7 @@
 package com.cydeo.step_definitions;
 
 import com.cydeo.pages.LoginPage;
+import com.cydeo.utilities.BrowserUtil;
 import com.cydeo.utilities.ConfigReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -12,21 +13,22 @@ import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.*;
 
-public class US_1 {
-    @Given("user on the login")
-    public void userOnTheLogin() {
-        String actualUrl = Driver.getDriver().getCurrentUrl();
-        String expectedUrl = "http://qa3.trycloud.net/index.php/login?clear=1";
-        assertEquals(expectedUrl,actualUrl);
-    }
-
+public class US1 {
 
     LoginPage login = new LoginPage();
+    @Given("user on the login")
+    public void userOnTheLogin() {
+        LoginPage login = new LoginPage();
+        login.goTo();
+        String actualUrl = Driver.getDriver().getCurrentUrl();
+        String expectedUrl = "http://qa3.trycloud.net/index.php/login";
+        assertEquals(expectedUrl,actualUrl);
+    }
 
     @When("user enter valid username and password")
     public void userEnterValidUsernameAndPassword() {
 
-        LoginPage login = new LoginPage();
+
         login.login(ConfigReader.read("username1"),ConfigReader.read("password"));
     }
 
@@ -38,16 +40,14 @@ public class US_1 {
     @Then("Verify user launched to the dashboard")
     public void verifyUserLaunchedToTheDashboard() {
        assertEquals("Dashboard - Trycloud QA", Driver.getDriver().getTitle());
+        Driver.closeBrowser();
     }
 
     @When("user enter invalid credentials")
     public void userEnterInvalidCredentials() {
-        login.login("USER582","user85236" );
-    }
 
-    @And("click login button")
-    public void clickLoginButton() {
-        System.out.println("User clicked button");
+        login.login("USER582","user85236" );
+        BrowserUtil.waitFor(2);
     }
 
     @Then("“Wrong username or password.” message should be displayed")

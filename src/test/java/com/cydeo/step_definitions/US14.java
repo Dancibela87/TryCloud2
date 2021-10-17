@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 
-public class US_14 {
+public class US14 {
     SearchFiles search = new SearchFiles();
 
     @Given("user is at the dashboard page")
@@ -45,5 +45,7 @@ public class US_14 {
 
         WebElement file = Driver.getDriver().findElement(By.xpath("//*[@id=\"header-menu-unified-search\"]/div[2]/ul[2]/li[1]/a/span/h3"));
         assertTrue(file.isDisplayed());
+
+        Driver.closeBrowser();
     }
 }
